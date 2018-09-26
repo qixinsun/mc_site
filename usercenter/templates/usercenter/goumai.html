@@ -1,0 +1,59 @@
+{%extends 'usercenter/index.html'%}
+
+{%block title%}
+{%endblock%}
+
+{%block content%}
+{%load static%}
+<!--right-->
+<div class="centers_mr">
+<div class="public_m1">
+	<div class="public_m2">购买记录</div>
+
+	<!--充值提现-->
+	<div class="chongzhi_htxm">
+		<a href="javascript:void(0);">记录数<font>({{count}})</font></a>
+		<!-- <a href="#">商家消息<font>(2)</font></a> -->
+	</div>
+	<!--全选和删除-->
+	<!-- <div class="chice_allm">
+		<input type="checkbox">
+		<i>全选</i>
+		<span>删除</span>
+	</div> -->
+	<!--一个订单信息-->
+	<div class="public_m5">
+		<table border="0" cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr style=" border-bottom:1px solid #000">       
+                    <th class="olist1">车辆价格</th>
+                    <th class="olist2">付款方式</th>              
+                    <th class="olist3">车型</th>
+                    <th class="olist4">操作时间</th>
+				</tr>
+				{%for r in records%}
+				<tr>		
+						<td>{{r.car.car_price}}万元</td>
+                        <td>{{r.p_type}}</td>
+                        <td>{{r.car.car_name}}</td>
+                        <td>{{r.pay_time}}</td>
+					</tr>
+				{%endfor%}
+				
+				<!-- <tr>		
+					<td><a href="#">木木小店</a></td>	 
+					<td>吃饭了么...</td>		
+					<td>2016/06/06 20:30</td>
+					<td><a href="#" style=" margin-right:6px">查看</a><a href="#">删除</a></td>
+				</tr> -->
+			</tbody>
+		</table>
+	</div>
+	<!--当没有东西时的东西-->
+	<div class="public_m6">
+		<img src="{% static 'usercenter/images/danmgydxm.png' %}"/>
+	</div>
+</div>
+</div>
+<!--页脚-->
+{%endblock%}

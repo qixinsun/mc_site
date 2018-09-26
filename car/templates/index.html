@@ -1,0 +1,421 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Basic Page Needs
+  ================================================== -->
+    <meta charset="utf-8">
+    <title>MC 放心购</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <!-- Mobile Specific Metas
+  ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <!-- CSS
+  ================================================== -->
+    <link rel="stylesheet" href="{% static 'car/css/zerogrid.css' %}">
+    <link rel="stylesheet" href="{% static 'car/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'car/css/responsiveslides.css' %}">
+    
+    <script src="{% static 'car/js/jquery-latest.min.js' %}"></script>
+    <script src="{% static 'car/js/script.js' %}"></script>
+    <script src="{% static 'car/js/jquery183.min.js' %}"></script>
+    <script src="{% static 'car/js/responsiveslides.min.js' %}"></script>
+    <script>
+        // You can also use "$(window).load(function() {"
+        $(function () {
+          // Slideshow 
+          $("#slider").responsiveSlides({
+            auto: true,
+            pager: false,
+            nav: true,
+            speed: 500,
+            namespace: "callbacks",
+            before: function () {
+              $('.events').append("<li>before event fired.</li>");
+            },
+            after: function () {
+              $('.events').append("<li>after event fired.</li>");
+            }
+          });
+        });
+    </script>
+    <style type="text/css">
+        #item1 {
+            text-align: center;
+            /*display: inline-block;*/
+            width: 1400px;
+            height: 1000px;
+            overflow: hidden;
+            margin-left: auto;
+            margin-right: auto;
+            border: #000 solid 5px;
+
+        }
+        #dongyuan{
+
+            width: 300px;
+            height: 400px;
+            float: left;
+        }
+        .item-1{
+            height: 400px;
+        }
+        .pr li a {
+            width: 100px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap-body">
+<!--////////////////////////////////////Header-->
+<header class="bg-theme">
+    <div class="wrap-header zerogrid">
+        <div class="row">
+            <div id="cssmenu" style="margin-right: 13%;">
+            
+                <ul class="pr">
+                   <li class='active'><a href="/car">首页</a></li>
+                   <li><a href="/car/filter/">车辆</a></li>
+                    {%if request.user.is_authenticated%}
+                    <li><a id="mytar" href="/usercenter">我的</a>
+                    <ul class="my">
+                        <li style="height: 42px;"><a style="width: 100px; line-height: 42px; vertical-align: middle;" href="/usercenter">个人中心</a></li>
+                        <li style="height: 60px;"><a style="width: 100px; line-height: 42px; vertical-align: middle;" href="/logout">退出登录</a></li>
+                    </ul>
+                    </li>
+                    <script>
+                        $(function(){
+                            $("ul.pr > li").hover(function(){
+                                $(this).children("ul").show("fast");
+                            }, function(){
+                                $(this).children("ul").hide("slow");
+                            })
+                        })
+                    </script>
+                    <!-- <li><a href="/logout">dengchu</a></li> -->
+                    {%else%}
+                    <li><a href="/login">尊贵登录</a></li>
+                   {%endif%}
+                   <!-- <li><a href="contact.html">预约看车</a></li> -->
+                </ul>
+            </div>
+            <a href='/' class="logo"><img src="{% static 'car/images/logo.png' %}" /></a>
+        </div>
+    </div>
+</header>
+<div class="slider">
+    <!-- Slideshow -->
+    <div class="callbacks_container">
+        <ul class="rslides" id="slider">
+            <!-- <li>
+                <img src="{% static 'car/images/slideshow-image1.jpg' %}" alt="">
+                <div class="caption">
+                    <h1>属于您的私人订制</h1>
+                    <span >时间大浪淘沙 留下来的都是有价值的</span>
+                </div>
+            </li>
+            <li>
+                <img src="{% static 'car/images/slideshow-image2.jpg' %}" alt="">
+                <div class="caption">
+                    <h1>领导时代  驾驭未来</h1>
+                    <span >实在 反而更难得我的感动偶尔与众不同无需潮流只要始终经典</span>
+                </div>
+            </li>
+            <li>
+                <img src="{% static 'car/images/slideshow-image3.jpg' %}" alt="">
+                <div class="caption">
+                    <h1>王者装备  演绎传奇</h1>
+                    <span >纯轿车式的新豪华   纯四驱的超能力</span>
+                </div>
+            </li> -->
+            {%for c in carousels%}
+                <li>
+                        <img src="/{{c.pic}}" alt="">
+                        <div class="caption">
+                            <h1>{{c.intro1}}</h1>
+                            <span>{{c.intro2}}</span>
+                        </div>
+                </li>
+            {%endfor%}
+        </ul>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<!-- <div class="bg-theme">
+    <div class="filter zerogrid">
+        <h2 class="t-center">寻找您的爱车</h2>
+        <div class="row">
+            <div class="col-1-4">
+                <div class="wrap-col">
+                    <span>车型 :</span><br/>
+                    <select>
+                        <option>--ALL--</option>
+                        <option>轿车</option>
+                        <option>SUV</option>
+                        <option>Jeep</option>
+                        <option>Mercedes-Benz</option>
+                        <option>Volvo</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-1-4">
+                <div class="wrap-col">
+                    <span>车名 :</span><br/>
+                    <select>
+                        <option>--ALL--</option>
+                        <option>Aston martin</option>
+                        <option>Audi</option>
+                        <option>Bentley</option>
+                        <option>Bmw</option>
+                        <option>Cadillac</option>
+                        <option>Chevrolet</option>
+                        <option>Citroen</option>
+                        <option>Dacia</option>
+                        <option>Dodge</option>
+                        <option>Ferrari</option>
+                        <option>Ford</option>
+                        <option>Gmc</option>
+                        <option>Hyundai</option>
+                        <option>Jaguar</option>
+                        <option>Lexus</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-1-4">
+                <div class="wrap-col">
+                    <span>价格 :</span><br/>
+                    <select>
+                        <option>--ALL--</option>
+                        <option>0-1000</option>
+                        <option>1000-5000</option>
+                        <option>5000-10000</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-1-4">
+                <div class="wrap-col">
+                    <br>
+                    <a href="#" class="button bt1">搜寻</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!--////////////////////////////////////Container-->
+<section id="container">
+    <div class="wrap-container clearfix">
+        <div id="main-content">
+            <div class="wrap-box"><!--Start Box-->
+                <div class="zerogrid">
+                    <div class="header">
+                     <h2>热卖车型</h2>
+                    </div>  
+                    <div class="row">
+                        <div class="col-1-3">
+                            <div class="wrap-col">
+                            {%for car in cars1%}
+                                {%ifequal rm_area.id car.car_spec_area.id%}
+                                <div class="item item-1 t-center">
+                                    <div class="item-container">
+                                        <a href="{%url 'car:car_detail' car.id%}">
+                                            <div class="item-caption">
+                                                <div class="item-caption-inner">
+                                                    <div class="item-caption-inner1">
+                                                        <!-- <span>{{car.car_name}}/{{car.car_price}}</span> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <img src="/{{car.car_href_pic}}" />
+                                        </a>
+                                    </div>
+                                    <div class="item-info">
+                                        <a href="{%url 'car:car_detail' car.id%}"><h3>{{car.car_name}}</h3></a>
+                                        <p>{{car.car_price}}万元</p>
+                                    </div>
+                                </div>
+                                {%endifequal%}
+                            {%endfor%}
+                             </div>
+                        </div>
+                        <div class="col-1-3">
+                            <div class="wrap-col">
+                            {%for car in cars2%}
+                                {%ifequal rm_area.id car.car_spec_area.id%}
+                                <div class="item item-1 t-center">
+                                    <div class="item-container">
+                                        <a href="{%url 'car:car_detail' car.id%}">
+                                            <div class="item-caption">
+                                                <div class="item-caption-inner">
+                                                    <div class="item-caption-inner1">
+                                                        <!-- <span>{{car.car_name}}/{{car.car_price}}</span> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <img src="/{{car.car_href_pic}}" />
+                                        </a>
+                                    </div>
+                                    <div class="item-info">
+                                        <a href="{%url 'car:car_detail' car.id%}"><h3>{{car.car_name}}</h3></a>
+                                        <p>{{car.car_price}}万元</p>
+                                    </div>
+                                </div>
+                                {%endifequal%}
+                            {%endfor%}
+                            </div>
+                        </div>
+                        <div class="col-1-3">
+                            <div class="wrap-col">
+                            {%for car in cars3%}
+                                {%ifequal rm_area.id car.car_spec_area.id%}
+                                <div class="item item-1 t-center">
+                                    <div class="item-container">
+                                        <a href="{%url 'car:car_detail' car.id%}">
+                                            <div class="item-caption">
+                                                <div class="item-caption-inner">
+                                                    <div class="item-caption-inner1">
+                                                        <!-- <span>{{car.car_name}}/{{car.car_price}}</span> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <img src="/{{car.car_href_pic}}" />
+                                        </a>
+                                    </div>
+                                    <div class="item-info">
+                                        <a href="{%url 'car:car_detail' car.id%}"><h3>{{car.car_name}}</h3></a>
+                                        <p>{{car.car_price}}万元</p>
+                                    </div>
+                                </div>
+                                {%endifequal%}
+                            {%endfor%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wrap-box t-center" style="background: #fff; box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.3);"><!--Start Box-->
+                <div class="zerogrid">
+                    <div class="header">
+                        <h2>欢迎来到MC放心购</h2>
+                    </div>
+                    <strong>今天你MC购了吗</strong>
+                    <p>MC放心购致力于中高档跑车的售卖，售后完善，是您的尊贵首选</p>
+                </div>
+            </div>
+            <div class="wrap-box" ><!--Start Box-->
+                <div class="zerogrid">
+                    <div class="header">
+                        <h2>经典车型</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-2-3">
+                            <div class="wrap-col">
+                                
+                                {% for car in cars%}
+                                 {%ifequal car.car_spec_area.id jd_area.id%}
+                                 <div class="row">
+                                    <div class="item">
+                                        <div class="col-1-3">
+                                            <div class="item-container">
+                                                <a href="{%url 'car:car_detail' car.id%}">
+                                                    <div class="item-caption">
+                                                        <div class="item-caption-inner">
+                                                            <div class="item-caption-inner1">
+                                                                <!-- <span>{{car.car_name}}</span> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <img src="/{{car.car_href_pic}}" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-2-3">
+                                            <div class="wrap-col">
+                                                <div class="item-info">
+                                                    <a href="{%url 'car:car_detail' car.id%}"><h3>{{car.car_name}}</h3></a>
+                                                    <p>{{car.car_price}}万元</p>
+                                                    <p>ABS, Leather seats, Power Assisted Steering, Electric heated seats, New HU and AU, Xenon headlights</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                                 {%endifequal%} 
+                                {%endfor%}
+                            </div>
+                        </div>
+                        <div id="sidebar" class="col-1-3">
+                            <div class="wrap-col">
+                                <!---- Start Widget ---->
+                                <div class="widget">
+                                    <div class="wid-header">
+                                        <h5>关于我们</h5>
+                                    </div>
+                                    <div class="wid-content">
+                                        <p>MC放心购致力于中高档跑车的售卖，售后完善，是您的尊贵首选</p>
+                                        <a href="#">戳我了解更多</a>
+                                    </div>
+                                </div>
+                                <!---- Start Widget ---->
+                                <div class="widget wid-post">
+                                    <div class="wid-header">
+                                        <h5>最新车型</h5>
+                                    </div>
+                                    <div class="wid-content">
+                                        
+                                        {% for car in cars%}
+                                 {%ifequal car.car_spec_area.id zx_area.id%}
+                                 <div class="post">
+                                            <a href="{%url 'car:car_detail' car.id%}"><img src="/{{car.car_href_pic}}"/></a>
+                                            <div class="wrapper">
+                                              <h5><a href="{%url 'car:car_detail' car.id%}">{{car.car_name}}</a></h5>
+                                               <span>首付60万</span>
+                                            </div>
+                                        </div>
+                                 {%endifequal%} 
+                                {%endfor%}
+                                    </div>
+                                </div>
+                                <!---- Start Widget ---->
+                                <div class="widget">
+                                    <div class="wid-header">
+                                        <h5>西安车展</h5>
+                                    </div>
+                                    <div class="wid-content">
+                                        <p>2018年6月26日 曲江国际会展中心<br>
+                                            抄低价购车
+                                         </p>
+                                        <a href="#" class="button bt1">返回上面</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--////////////////////////////////////Footer-->
+<footer>
+    <div class="zerogrid">
+        <div class="wrap-footer">
+            <div class="row">
+                <h3>联系我们</h3>
+                <span>电话 / 88886666 </span></br>
+                <span>邮箱 / info@domain.com  </span></br>
+                <span>地址 / 西北农林科技大学 </span></br>
+                <span><strong>Copyright &copy; 2018　All rights reserved</strong></span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</div>
+</body></html>

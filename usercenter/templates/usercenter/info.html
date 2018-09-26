@@ -1,0 +1,41 @@
+{%extends 'usercenter/index.html'%} {%block title%} {%endblock%} {%block content%}
+<!--right-->
+<div class="centers_mr">
+	<h1 class="welcom_tm">欢迎您
+		<font> ！</font>
+	</h1>
+	<div class="public_m1">
+		<div class="public_m2">信息管理</div>
+		<!--照片和内容-->
+		<div class="zp_nrm">
+			<div class="zp_nrm_r">
+				<form action="" method="post" enctype="multipart/form-data">
+					<p>
+						<em>头像：</em>
+						<i>
+							<img src="/{{request.user.image}}" alt="" height="40px" width="40px">
+						</i>
+						<a href="javascript:void(0);">
+							<label for="usericon">点击更换</label>
+						</a>
+					</p>
+					<div style="display: none">
+						<input type="file" name="pic" id="usericon">
+					</div>
+					{%csrf_token%}
+					<p>用户名：{{request.user.username}}</p>
+					<p>
+						<em>邮箱：</em>
+						<i>{{request.user.email}}</i>
+					</p>
+					<!-- <p><em>手机号：</em><i>{{request.user.phone}}</i></p>
+					<p><em>性别：</em><input type="radio" name="sex" class="sex_m"><i>保密</i><input type="radio" name="sex" class="sex_m"><i>男</i><input type="radio" name="sex" class="sex_m"><i>女</i></p>
+					<p><em>地址：</em><i>{{request.user.address}}</i><a href="#">点击修改</a></p> -->
+					<!-- <a href="" class="public_m3">保存修改</a> -->
+					<input type="submit" class="public_m3" value="保存修改">
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--页脚-->
+	{%endblock%}

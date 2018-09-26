@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>active_success</title>
+</head>
+<body>
+    {% if error %}
+        <p style="color: red">{{error}}</p>
+        <p>点击<a href="{% url 'register' %}">此处</a>重新注册.</p>
+    {%else%}
+        <div id="main">
+            <p>用户 {{user.username}} 账户已经激活.</p>
+            <p>点击<a href="{% url 'login' %}">此处</a>进行登录.</p>
+        </div>
+    {% endif %}
+</body>
+</html>

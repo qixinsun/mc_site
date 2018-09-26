@@ -1,0 +1,283 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<style type="text/css">
+		
+		#mm1{
+			width: 100%;
+			height: 200px;
+			/*border: 5px solid gray;*/
+		}
+		.pr li a {
+            width: 100px;
+            text-align: center;
+        }
+    </style>
+	</style>
+	<meta charset="UTF-8">
+	<title>全部车辆</title>
+	<link rel="stylesheet" href="{% static 'car/css/zerogrid.css' %}">
+    <link rel="stylesheet" href="{% static 'car/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'car/css/responsiveslides.css' %}">
+    
+    <script src="{% static 'car/js/jquery-latest.min.js' %}"></script>
+    <script src="{% static 'car/js/script.js' %}"></script>
+    <script src="{% static 'car/js/jquery183.min.js' %}"></script>
+    <script src="{% static 'car/js/responsiveslides.min.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'car/css/filter.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'car/css/style.css' %}">
+
+</head>
+
+<body>
+
+	<header class="bg-theme">
+    <div class="wrap-header zerogrid">
+        <div class="row">
+            <div id="cssmenu" style="margin-right: 13%;">
+            
+                <ul class="pr">
+                   <li class='active'><a href="/car">首页</a></li>
+                   <li><a href="/car/filter/">车辆</a></li>
+                    {%if request.user.is_authenticated%}
+                    <li><a id="mytar" href="/usercenter">我的</a>
+						<ul class="my">
+							<li style="height: 42px;"><a style="width: 100px; line-height: 42px; vertical-align: middle;" href="/usercenter">个人中心</a></li>
+							<li style="height: 60px;"><a style="width: 100px; line-height: 42px; vertical-align: middle;" href="/logout">退出登录</a></li>
+						</ul>
+						</li>
+                    <script>
+                        $(function(){
+                            $("ul.pr > li").hover(function(){
+                                $(this).children("ul").show("fast");
+                            }, function(){
+                                $(this).children("ul").hide("slow");
+                            })
+                        })
+                    </script>
+                    <!-- <li><a href="/logout">dengchu</a></li> -->
+                    {%else%}
+                    <li><a href="/login">尊贵登录</a></li>
+                   {%endif%}
+                   <!-- <li><a href="contact.html">预约看车</a></li> -->
+                </ul>
+            </div>
+            <a href='/' class="logo"><img src="{% static 'car/images/logo.png' %}" /></a>
+        </div>
+    </div>
+</header>
+
+
+
+
+	<div class="searchk">
+		<input id="kw" type="text" value="请输入..." onfocus="if(value=='请输入...') {value=''}" onblur="if (value=='') {value='请输入...'}">
+		<div class="ssl">
+			<img src="{% static 'car/images/fangdajing.png' %}" />
+		</div>
+	</div>
+
+	<ul class="select">
+		<li class="select-list">
+			<dl id="select1">
+				<dt>品牌：</dt>
+				<dd class="select-all selected">
+					<a href="javascript:void(0);">全部</a>
+				</dd>
+				{% for brand in brands %}
+				<dd>
+					<a href="javascript:void(0);">{{brand.barnd_name}}</a>
+				</dd>
+				{% endfor %}
+			</dl>
+		</li>
+		<li class="select-list">
+			<dl id="select2">
+				<dt>首付：</dt>
+				<dd class="select-all selected">
+					<a href="javascript:void(0);">全部</a>
+				</dd>
+				<dd>
+					<a href="javascript:void(0);">1万以内</a>
+				</dd>
+				<dd>
+					<a href="javascript:void(0);">1-2万</a>
+				</dd>
+				<dd>
+					<a href="javascript:void(0);">2-3万</a>
+				</dd>
+				<dd>
+					<a href="javascript:void(0);">3-4万</a>
+				</dd>
+				<dd>
+					<a href="javascript:void(0);">4-5万</a>
+				</dd>
+				<dd>
+					<a href="javascript:void(0);">5万以上</a>
+				</dd>
+			</dl>
+		</li>
+		<li class="select-list">
+			<dl id="select3">
+				<dt>月供：</dt>
+				<dd class="select-all selected">
+					<a href="javascript:void(0);">全部</a>
+				</dd>
+				<dd>
+					<a href="javascript:void(0);">2000元以内</a>
+				</dd>
+				<dd>
+					<a href="javascript:void(0);">2000-3000元</a>
+				</dd>
+				<dd>
+					<a href="javascript:void(0);">3000-4000元</a>
+				</dd>
+				<dd>
+					<a href="javascript:void(0);">4000-5000元</a>
+				</dd>
+				<dd>
+					<a href="javascript:void(0);">5000元以上</a>
+				</dd>
+			</dl>
+		</li>
+		<li class="select-list">
+			<dl id="select4">
+				<dt>车价：</dt>
+				<dd class="select-all selected">
+					<a href="javascript:void(0);">全部</a>
+				</dd>
+				<dd>
+					<a href="javascript:void(0);">0-10万</a>
+				</dd>
+				<dd>
+					<a href="javascript:void(0);">10-20万</a>
+				</dd>
+				<dd>
+					<a href="javascript:void(0);">20-30万</a>
+				</dd>
+				<dd>
+					<a href="javascript:void(0);">30-40万</a>
+				</dd>
+				<dd>
+					<a href="javascript:void(0);">40万以上</a>
+				</dd>
+			</dl>
+		</li>
+		<li class="select-list">
+			<dl id="select5">
+				<dt>车型：</dt>
+				<dd class="select-all selected">
+					<a href="javascript:void(0);">全部</a>
+				</dd>
+				{% for type in types %}
+					<dd>
+						<a href="javascript:void(0);">{{type.type_name}}</a>
+					</dd>
+				{%endfor%}
+			</dl>
+		</li>
+		<li class="select-result">
+			<dl>
+				<dt>已选：</dt>
+				<dd class="select-no">暂时没有选择过滤条件</dd>
+			</dl>
+		</li>
+	</ul>
+	<div class="tishi">
+		<img src="{%static 'car/images/tiao.jpg' %}" alt="" height="25px" width="5px" style="float:left;">
+		<h3>为您找到
+			<font id="total"></font>款车</h3>
+	</div>
+
+	<div class="cars" id="car-area">
+		<!-- {% for car in cars %}
+		<div class="car">
+			<a href="{%url 'car:car_detail' car.id %}">
+				<img src="/{{car.car_href_pic}}" alt="" style="width: 250px; height: auto;">
+			</a>
+			<p>{{car.car_name}}</p>
+			<p>{{car.car_price}}万元</p>
+		</div>
+		{% endfor %} -->
+	</div>
+
+
+	<div class="fanye">
+		<a href="javascript:" class="prev">上一页&lt;&lt;</a>
+		<b id="dangqian">1</b> <b>/</b> <span>4</span>
+		<a href="javascript:" class="next" style="float:right;">&gt;&gt;下一页</a>
+
+	</div>
+	<script type="text/javascript" src="{% static 'car/js/jquery-1.7.2.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'car/js/filter.js' %}"></script>
+	<script type="text/javascript">
+
+		function count() {
+			var num = $(".cars .car").length;
+			//document.getElementById("t").innerHtml=num;
+			var pageSize = Math.ceil(num / 15);  //总共有几页数据，5是一页显示几个；
+			var indexSize = 1;//当前在第几页数据
+			var $b = $(".fanye #dangqian");
+			var $span = $(".fanye span");
+			$(".car:lt(15)").show();
+			$(".car:gt(14)").hide();
+			$b.text(indexSize);
+			$span.text(pageSize);
+			var $next = $(".fanye a.next");
+			var $prev = $(".fanye a.prev");
+			$next.click(function () {
+				if (indexSize < pageSize) {
+					indexSize++;
+					$b.text(indexSize);
+					$(".cars .car").hide();
+					$(".cars .car:lt(" + indexSize * 15 + ")").show();
+					$(".cars .car:lt(" + (indexSize - 1) * 15 + ")").hide();
+				}
+			});
+			$prev.click(function () {
+				if (indexSize == 1) {
+					return false;
+				}
+				indexSize--;
+				$b.text(indexSize);
+				$(".cars .car").hide();
+				$(".cars .car:lt(" + indexSize * 15 + ")").show();
+				$(".cars .car:lt(" + (indexSize - 1) * 15 + ")").hide();
+			});
+		var num = $(".cars .car").length;
+		document.getElementById("total").innerHTML = num;
+		}
+	</script>
+	<!-- <footer>
+    <div class="zerogrid">
+        <div class="wrap-footer">
+            <div class="row">
+                <h3>联系我们</h3>
+                <span>电话 / 88886666 </span></br>
+                <span>邮箱 / info@domain.com  </span></br>
+                <span>地址 / 西北农林科技大学 </span></br>
+                <span><strong>Copyright &copy; 2018　All rights reserved</strong></span>
+            </div>
+        </div>
+    </div>
+</footer> -->
+	<!-- {%include 'footer.html'%} -->
+
+	<footer>
+		&nbsp;&nbsp;&nbsp;&nbsp;
+
+		<div id="mm1">
+			<h3>联系我们</h3>
+                <span>电话 / 88886666 </span></br>
+                <span>邮箱 / info@domain.com  </span></br>
+                <span>地址 / 西北农林科技大学 </span></br>
+                <span><strong>Copyright &copy; 2018　All rights reserved</strong></span>
+			
+
+		</div>
+	</footer>
+</body>
+
+</html>

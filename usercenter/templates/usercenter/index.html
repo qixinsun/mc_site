@@ -1,0 +1,202 @@
+{%load static%}
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{%block title%}会员中心{%endblock%}</title>
+
+  <link rel="stylesheet" type="text/css" href="{%static 'usercenter/css/center.css'%}">
+  <link rel="stylesheet" type="text/css" href="{%static 'usercenter/css/style.css'%}">
+  <link rel="stylesheet" href="{%static 'bootstrap/css/bootstrap.css'%}">
+  <script src="{%static 'usercenter/js/jquery-1.8.3.min.js'%}"></script>
+  <!-- <script src="{%static 'usercenter/js/index2.js'%}"></script> -->
+  <!-- <link rel="stylesheet" type="text/css" href="css/center.css"> -->
+  <style>
+  .pr li a {
+            width: 100px;
+            text-align: center;
+        }
+    </style>
+  </style>
+  
+</head>
+<body>
+  <header class="bg-theme">
+    <div class="wrap-header zerogrid">
+        <div class="row">
+            <div id="cssmenu" style="margin-right: 13%;">
+            
+                <ul class="pr">
+                   <li class='active'><a href="/car">首页</a></li>
+                   <li><a href="/car/filter/">车辆</a></li>
+                    {%if request.user.is_authenticated%}
+                    <li><a id="mytar" href="/usercenter">我的</a>
+                      <ul class="my">
+                          <li style="height: 42px;"><a style="width: 100px; line-height: 42px; vertical-align: middle;" href="/usercenter">个人中心</a></li>
+                          <li style="height: 60px;"><a style="width: 100px; line-height: 42px; vertical-align: middle;" href="/logout">退出登录</a></li>
+                      </ul>
+                      </li>
+                    <script>
+                        $(function(){
+                            $("ul.pr > li").hover(function(){
+                                $(this).children("ul").show("fast");
+                            }, function(){
+                                $(this).children("ul").hide("slow");
+                            })
+                        })
+                    </script>
+                    <!-- <li><a href="/logout">dengchu</a></li> -->
+                    {%else%}
+                    <li><a href="/login">尊贵登录</a></li>
+                   {%endif%}
+                   <!-- <li><a href="contact.html">预约看车</a></li> -->
+                </ul>
+            </div>
+            <a href='/' class="logo"><img src="{% static 'car/images/logo.png' %}" /></a>
+        </div>
+    </div>
+</header>
+
+ <!--当前位置-->
+ <div class="now_positionm">
+  <span>当前位置：</span><a href="#">首页></a><a href="#">个人中心</a>
+</div>
+<!--centers kaobian_xsd-->
+<div class="centers_m">
+    <!--清除浮动-->
+  <div class="clear_sm"></div>
+  <!--left-->
+  <div class="centers_ml">
+   <!--头像-->
+  <div class="center_header">
+    {%comment%}
+       TODO：将下方的 图像和名字用用户的信息加载
+    {%endcomment%}
+     <a href="{%url 'usercenter:index'%}"><img src="/{{request.user.image}}" alt=""></a>
+     <em>您好，<font>{{request.user.username}}</font></em>
+   </div>
+   <!--列表go-->
+   <div class="centers_listm">
+     <div class="centers_listm_one">
+       <img src="{%static 'usercenter/images/zshy.png'%}"/>
+       <a href="{%url 'usercenter:index'%}"><em>个人中心</em></a>
+     </div>
+     <!--一条开始-->
+     <div class="centers_listm_one_in">
+      <img src="{%static 'usercenter/images/shezhi.png'%}"/>
+      <em>资料管理</em>
+      <b></b>
+    </div>
+    <span class="gjszmdm">
+      <a href="{%url 'usercenter:info'%}" class="center_in_self"><font>信息资料</font></a>
+    </span>
+    <!--一条开始-->
+    <div class="centers_listm_one_in">
+        <img src="{%static 'usercenter/images/ddgl.png'%}"/>
+        <em>资金管理</em>
+        <b></b>
+      </div>
+      <span class="gjszmdm">
+        <a href="{%url 'usercenter:zijin'%}" class="center_in_self"><font>我的资金</font></a>
+        <a href="{%url 'usercenter:jilu'%}" class="center_in_self"><font>交易记录</font></a>
+        <!-- <a href="{%url 'usercenter:dianping'%}" class="center_in_self"><font>我的点评</font></a> -->
+      </span>
+    <!--一条开始-->
+    <div class="centers_listm_one_in">
+      <img src="{%static 'usercenter/images/ddgl.png'%}"/>
+      <em>订单管理</em>
+      <b></b>
+    </div>
+    <span class="gjszmdm">
+      <a href="{%url 'usercenter:yuyue'%}" class="center_in_self"><font>我的预约</font></a>
+      <a href="{%url 'usercenter:goumai'%}" class="center_in_self"><font>购买记录</font></a>
+      <!-- <a href="{%url 'usercenter:dianping'%}" class="center_in_self"><font>我的点评</font></a> -->
+    </span>
+    <!--一条开始-->
+    <div class="centers_listm_one_in">
+      <img src="{%static 'usercenter/images/suo.png'%}"/>
+      <em>账户安全</em>
+      <b></b>
+    </div>
+    <span class="gjszmdm">
+      <a href="{%url 'usercenter:safe'%}" class="center_in_self"><font>账户安全</font></a>
+
+      <a href="{%url 'usercenter:mima'%}" class="center_in_self"><font>密码修改</font></a>
+    </span>    
+    <!--一条开始-->
+    <div class="centers_listm_one_in">
+      <img src="{%static 'usercenter/images/wdssc.png'%}"/>
+      <em>收藏管理</em>
+      <b></b>
+    </div>
+    <span class="gjszmdm">
+     <a href="{%url 'usercenter:fav'%}" class="center_in_self"><font>车辆收藏</font></a>
+   </span>    
+   <!--一条开始-->
+   <div class="centers_listm_one_in">
+    <img src="{%static 'usercenter/images/myfridend.png'%}"/>
+    <em>消息管理</em>
+    <b></b>
+  </div>
+  <span class="gjszmdm">
+   <a href="{%url 'usercenter:xiaoxi'%}" class="center_in_self"><font>我的消息</font></a>
+ </span>
+</div>
+<script type="text/javascript">
+        $(function(){//第一步都得写这个
+            $(".centers_listm_one_in").click(function(){
+       $(this).next(".gjszmdm").slideToggle().siblings("gjszmdm").slideUp()
+     });
+        })
+  </script>
+</div>
+{%block content%}
+<!--right-->
+<div class="centers_mr">
+  <h1 class="welcom_tm">欢迎您  
+    <font> {{request.user.username}} </font>！您上次登录时间为 {{request.user.last_login}}</h1>
+    <!--一条开始-->
+    <div class="public_m1">
+     <div class="public_m2">个人中心</div>
+     <!--照片和内容--> 
+     <div class="zp_nrm">
+       <!--left-->
+       <div class="zp_nrm_l">
+         <img src="/{{request.user.image}}"/>
+
+       </div>
+       <!--right-->
+       <div class="zp_nrm_r">
+
+         <p><em>用户名：</em><i>{{request.user.username}}</i></p>
+         <p><em>邮箱：</em><i>{{request.user.email}}</i></p>
+         <!-- <p><em>手机号：</em><i>{{request.user.phone}}</i></p> -->
+         <!-- <p><em>性别：</em><input type="radio" name="sex" class="sex_m"><i>保密</i><input type="radio" name="sex" class="sex_m"><i>男</i><input type="radio" name="sex" class="sex_m"><i>女</i></p> -->
+         <!-- <p><em>性别：</em><i>{{request.user.gender}}</i></p>
+         <p><em>地址:  &nbsp;</em><i>{{request.user.address}}</i></p> -->
+       </div>
+     </div>
+   </div>
+</div>
+{%endblock%}
+
+<div class="footer_wy">
+  <footer>
+      <div class="zerogrid">
+          <div class="wrap-footer">
+              <div class="row">
+                  <h3>联系我们</h3>
+                  <span>电话 / 88886666 </span></br>
+                  <span>邮箱 / info@domain.com  </span></br>
+                  <span>地址 / 西北农林科技大学 </span></br>
+                  <span><strong>Copyright &copy; 2018　All rights reserved</strong></span>
+              </div>
+          </div>
+      </div>
+  </footer>
+</div>
+
+<script src="{%static 'bootstrap/jquery/jquery.js'%}"></script>
+<script src="{%static 'bootstrap/js/bootstrap.js'%}"></script>
+</body>
+</html>   

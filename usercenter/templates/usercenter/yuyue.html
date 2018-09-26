@@ -1,0 +1,77 @@
+{%extends 'usercenter/index.html'%} {%block title%} {%endblock%} {%block content%}
+<!--right-->
+<div class="centers_mr">
+<div class="public_m5">
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+            <tr style=" border-bottom:1px solid #000">
+                <th class="olist1">预约单编号</th>
+                <th class="olist2">预约时间</th>
+                <th class="olist3">状态</th>
+                <th class="olist4">查看订单详情</th>
+            </tr>
+            {%for rl in reser_list%}
+            <tr>
+                <td>{{rl.id}}</td>
+                <td>{{rl.resevation_time}}</td>
+                <td>{%ifequal rl.resevation_is_active 1%}<font style="color:green;">预约成功</font>{%else%}正在处理{%endifequal%}</td>
+                <td><a href="" data-toggle="modal" data-target="#myModal{{rl.id}}">预约详情</a></td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
+</div>
+<style>
+    .modal{
+        margin-top: 200px;
+    }
+</style>
+{%for rl in reser_list%}
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal{{rl.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">预约详情</h4>
+            </div>
+            <div class="modal-body">
+                <table border="2" cellspacing="0" cellpadding="30" width="570" align="center">
+                    <tbody>
+                        <tr style=" border-bottom:1px solid #000" align="center">
+                            <!-- <tr>       -->
+                            <th class="olist1">预约车辆</th>
+                            <th class="olist2">预约用户名</th>
+                            <th class="olist2">试车时间</th>
+                            <th class="olist3">状态</th>
+                            <th class="olist4">销售员姓名</th>
+                            <th class="olist4">销售员联系方式</th>
+                        </tr>
+                        <tr>
+                            <td>{{rl.resevation_car}}</td>
+                            <td>{{rl.a_user_name}}</td>
+                            <td>{{rl.meet_time}}</td>
+                            <td>{%ifequal rl.resevation_is_active 1%}<font style="color:green;">预约成功</font>{%else%}正在处理{%endifequal%}</td>
+                            <td>{{rl.sale_name}}</td>
+                                                                              
+                            <td>{{rl.sale_telephone}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div>
+<!-- /.modal -->
+{%endfor%}
+<!--页脚-->
+</div>
+{%endblock%}

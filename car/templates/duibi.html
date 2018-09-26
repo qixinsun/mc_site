@@ -1,0 +1,314 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="{%static 'car/css/compare.css'%}">
+    <!-- <link rel="stylesheet" href="{%static 'car/css/style.css'%}"> -->
+    <title></title>
+    <link rel="stylesheet" href="{%static 'bootstrap/css/bootstrap.css'%}">
+
+    <link rel="stylesheet" href="{% static 'car/css/zerogrid.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'car/css/style.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'car/css/responsiveslides.css' %}">
+    <style>
+    .pr li a {
+            width: 100px;
+            text-align: center;
+        }
+    </style>
+    </style>
+    
+</head>
+
+<body>
+   <header class="bg-theme">
+    <div class="wrap-header zerogrid">
+        <div class="row">
+            <div id="cssmenu" style="margin-right: 13%;">
+            
+                <ul class="pr">
+                   <li class='active'><a href="/car">首页</a></li>
+                   <li><a href="/car/filter/">车辆</a></li>
+                    {%if request.user.is_authenticated%}
+                    <li><a id="mytar" href="/usercenter">我的</a>
+                        <ul class="my">
+                            <li style="height: 42px;"><a style="width: 100px; line-height: 42px; vertical-align: middle;" href="/usercenter">个人中心</a></li>
+                            <li style="height: 60px;"><a style="width: 100px; line-height: 42px; vertical-align: middle;" href="/logout">退出登录</a></li>
+                        </ul>
+                        </li>
+                    <script>
+                        $(function(){
+                            $("ul.pr > li").hover(function(){
+                                $(this).children("ul").show("fast");
+                            }, function(){
+                                $(this).children("ul").hide("slow");
+                            })
+                        })
+                    </script>
+                    <!-- <li><a href="/logout">dengchu</a></li> -->
+                    {%else%}
+                    <li><a href="/login">尊贵登录</a></li>
+                   {%endif%}
+                   <!-- <li><a href="contact.html">预约看车</a></li> -->
+                </ul>
+            </div>
+            <a href='index.html' class="logo"><img src="{% static 'car/images/logo.png' %}" /></a>
+        </div>
+    </div>
+</header>
+    <div id="div1">
+        <img src="images/deng.jpg" alt="" height="30px" width="40px" style="float:left;margin-top:10px;"> 以下信息仅供参考，不构成任何买卖协议，实际情况以店内销售情况为准
+    </div>
+    <div id="div2">
+        <table align="center" border="1px">
+            <thead>
+                <h2>&nbsp;&nbsp;&nbsp;&nbsp;车辆信息对比</h2></thead>
+            <tr>
+                <td class="car">
+                    <center>
+                        <h3>对比车型</h3>
+                    </center>
+                </td>
+                <td class="car">
+                    <div class="div3" id="car1">
+                        <input type="hidden" id="chooice-car1" value=""> {%if car1%}
+                        <!-- <div style="position: absolute; width:35px; display: inline-block; float: right; background: #000;"></div> -->
+                        <span><img class="close" src="{%static 'car/images/close.png'%}" alt="关闭" style="width: 35px;float: right; position: absolute;"></span>
+                        <img src="/{{car1.car_href_pic}}" style="width: 278px;" alt=""> {%else%}
+                        <img class="jiahao" src="{% static 'car/images/jiahao.PNG' %}" data-toggle="modal" data-target="#myModal" alt="">
+                        <!-- 在这里加入汽车的图片 -->
+                        <img class="tu" src="" alt="" onerror="this.style.display='none'"> {%endif%}
+                    </div>
+                </td>
+                <td class="car">
+                    <div class="div3" id="car2">
+                        <input type="hidden" id="chooice-car2" value=""> {%if car2%}
+                        <span><img class="close" src="{%static 'car/images/close.png'%}" alt="关闭" style="width: 35px;float: right; position: absolute;"></span>
+                        <img src="/{{car2.car_href_pic}}" style="width: 278px;" alt=""> {%else%}
+                        <img class="jiahao" src="{% static 'car/images/jiahao.PNG' %}" data-toggle="modal" data-target="#myModal" alt="">
+                        <!-- 在这里加入汽车的图片 -->
+                        <img class="tu" src="" alt="" onerror="this.style.display='none'"> {%endif%}
+                    </div>
+                </td>
+                <td class="car">
+                    <div class="div3" id="car3">
+                        <input type="hidden" id="chooice-car3" value=""> {%if car3%}
+                        <span><img class="close" src="{%static 'car/images/close.png'%}" alt="关闭" style="width: 35px;float: right; position: absolute;"></span>
+                        <img src="/{{car3.car_href_pic}}" style="width: 278px;" alt=""> {%else%}
+                        <img class="jiahao" src="{% static 'car/images/jiahao.PNG' %}" data-toggle="modal" data-target="#myModal" alt="">
+                        <!-- 在这里加入汽车的图片 -->
+                        <img class="tu" src="" alt="" onerror="this.style.display='none'"> {%endif%}
+                    </div>
+                </td>
+                <td class="car">
+                    <div class="div3" id="car4">
+                        <input type="hidden" id="chooice-car4" value=""> {%if car4%}
+                        <span><img class="close" src="{%static 'car/images/close.png'%}" alt="关闭" style="width: 35px;float: right; position: absolute;"></span>
+                        <img src="/{{car4.car_href_pic}}" style="width: 278px;" alt=""> {%else%}
+                        <img class="jiahao" src="{% static 'car/images/jiahao.PNG' %}" data-toggle="modal" data-target="#myModal" alt="">
+                        <!-- 在这里加入汽车的图片 -->
+                        <img class="tu" src="" alt="" onerror="this.style.display='none'"> {%endif%}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-right:0px solid;">
+                    <center>
+                        <h3>基本信息</h3></center>
+                </td>
+            </tr>
+            <tr>
+                <td class="infoName">车型</td>
+                <td>{{car1.car_name}}</td>
+                <td>{{car2.car_name}}</td>
+                <td>{{car3.car_name}}</td>
+                <td>{{car4.car_name}}</td>
+            </tr>
+            <tr>
+                    <td class="infoName">价格（万元）</td>
+                    <td>{{car1.car_price}}</td>
+                    <td>{{car2.car_price}}</td>
+                    <td>{{car3.car_price}}</td>
+                    <td>{{car4.car_price}}</td>
+            </tr>
+            <tr>
+                <td class="infoName">车身结构</td>
+                <td>{{car1.car_body_work}}</td>
+                <td>{{car2.car_body_work}}</td>
+                <td>{{car3.car_body_work}}</td>
+                <td>{{car4.car_body_work}}</td>
+            </tr>
+            <tr>
+                <td class="infoName">长/宽/高</td>
+                <td>{{car1.car_l_w_h}}</td>
+                <td>{{car2.car_l_w_h}}</td>
+                <td>{{car3.car_l_w_h}}</td>
+                <td>{{car4.car_l_w_h}}</td>
+            </tr>
+            <tr>
+                <td class="infoName">发动机</td>
+                <td>{{car1.car_engine}}</td>
+                <td>{{car2.car_engine}}</td>
+                <td>{{car3.car_engine}}</td>
+                <td>{{car4.car_engine}}</td>
+            </tr>
+            <tr>
+                <td class="infoName">变速箱</td>
+                <td>{{car1.car_gear_box}}</td>
+                <td>{{car2.car_gear_box}}</td>
+                <td>{{car3.car_gear_box}}</td>
+                <td>{{car4.car_gear_box}}</td>
+            </tr>
+            <tr>
+                <td class="infoName">驱动方式</td>
+                <td>{{car1.car_drive_way}}</td>
+                <td>{{car2.car_drive_way}}</td>
+                <td>{{car3.car_drive_way}}</td>
+                <td>{{car4.car_drive_way}}</td>
+            </tr>
+            <tr>
+                <td class="infoName">燃料类型</td>
+                <td>{{car1.car_fuel_type}}</td>
+                <td>{{car2.car_fuel_type}}</td>
+                <td>{{car3.car_fuel_type}}</td>
+                <td>{{car4.car_fuel_type}}</td>
+            </tr>
+            <tr>
+                <td class="infoName">综合油耗</td>
+                <td>{{car1.car_oil_cons}}</td>
+                <td>{{car2.car_oil_cons}}</td>
+                <td>{{car3.car_oil_cons}}</td>
+                <td>{{car4.car_oil_cons}}</td>
+            </tr>
+            <tr>
+                <td class="infoName">车辆配色</td>
+                <td>{{car1.car_color}}</td>
+                <td>{{car2.car_color}}</td>
+                <td>{{car3.car_color}}</td>
+                <td>{{car4.car_color}}</td>
+            </tr>
+<!--             <tr>
+                <td class="infoName">油箱容量</td>
+                <td>{{car1.car_name}}</td>
+                <td>{{car2.car_name}}</td>
+                <td>{{car3.car_name}}</td>
+                <td>{{car4.car_name}}</td>
+            </tr> -->
+        </table>
+    </div>
+    <!-- 模态框（Modal） -->
+    <style>
+    .modal {
+        padding-top: 200px;
+    }
+    </style>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                    选择车辆
+                </h4>
+                </div>
+                <div class="modal-body">
+                    <label for="chooice-brand">选择品牌</label>
+                    <select name="brand" id="chooice-brand">
+                        {% for brand in brands%}
+                        <option value="{{brand.id}}">{{brand.barnd_name}}</option>
+                        {%endfor%}
+                    </select>
+                    <label for="chooice-car">选择车型</label>
+                    <select name="car" id="chooice-car">
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" id="selected-car" class="btn btn-primary" data-dismiss="modal">
+                        确认
+                    </button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+    <script src="{%static 'bootstrap/jquery/jquery.js'%}"></script>
+    <script src="{%static 'bootstrap/js/bootstrap.js'%}"></script>
+    <script>
+    $(function() {
+        var first = $("#chooice-brand")[0].value;
+        get_cars(first);
+    })
+    $("#chooice-brand").change(function() {
+        get_cars(this.value);
+    })
+
+    function get_cars(brand_id) {
+        $("#chooice-car").empty();
+        $.ajax({
+            url: "{%url 'car:get_cars_by_brand' %}",
+            data: {
+                'brand': brand_id,
+                'csrfmiddlewaretoken': '{{csrf_token}}'
+            },
+            type: 'POST',
+            success: function(res) {
+                obj = $("#chooice-car");
+                data = res.res;
+                data.forEach(function(e) {
+                    obj.append("<option value='" + e.id + "'>" + e.name + "</option>");
+                });
+            }
+        });
+    };
+    $(".jiahao").click(function() {
+        selected = this.parentNode;
+    })
+    $("#selected-car").click(function() {
+        selected.childNodes[1].value = $("#chooice-car").val();
+        var car1 = $("#chooice-car1").val()||get_param("car1");
+        var car2 = $("#chooice-car2").val()||get_param("car2");
+        var car3 = $("#chooice-car3").val()||get_param("car3");
+        var car4 = $("#chooice-car4").val()||get_param("car4");
+        var href = "car1=" + car1 + "&car2=" + car2 + "&car3=" + car3 + "&car4=" + car4;
+        href = window.location.pathname + "?" + href;
+        window.location.href = href;
+    })
+
+    function get_param(param) {
+        var referrer = document.location.href;
+        var index = referrer.indexOf("?");
+        var params = referrer.substring(index + 1);
+        var reg = new RegExp("(^|&)" + param + "=([^&]*)(&|$)");
+        var r = params.match(reg);
+        if (r != null) 
+            return decodeURI(r[2]);
+        else
+        return "";
+    }
+    $(".close").click(function(){
+        href = clean_param(this.parentNode.parentNode.id);
+        href = window.location.pathname + "?" + href;
+        window.location.href = href;
+    })
+    function clean_param(param){
+        var referrer = document.location.href;
+        var index = referrer.indexOf("?");
+        var params = referrer.substring(index + 1);
+        var reg = new RegExp("(^|&)" + param + "=([^&]*)(&|$)");
+        return params.replace(reg, '$1'+param+'='+'$3');
+    }
+    </script>
+
+
+    {% include 'footer.html' %}
+</body>
+
+</html>

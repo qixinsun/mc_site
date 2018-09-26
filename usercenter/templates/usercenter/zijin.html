@@ -1,0 +1,24 @@
+{%extends 'usercenter/index.html'%} {%block title%} {%endblock%} {%block content%}
+<!--right-->
+<div class="centers_mr">
+    <h1 class="welcom_tm">欢迎您
+        <font> ！</font>
+    </h1>
+    <div class="public_m1">
+        <div class="public_m2">我的资金</div>
+        <!--照片和内容-->
+        <div class="zp_nrm">
+            <div class="zp_nrm_r">
+                <p>账户余额： {{request.user.useraccount.yue}}元
+                </p>
+                <form action="" method="POST">
+                    {%csrf_token%} 充值：
+                    <input type="number" name="addmoney" border='1' required>
+                    <input type="submit" value="充值">
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <!--页脚-->
+    {%endblock%}

@@ -1,0 +1,114 @@
+<!Doctype html>
+<html lang="zh">
+{%load static%}
+<head>
+	<title>用户注册　-- ＭＣ汽车网</title>
+	<!-- Meta tag Keywords -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8" />
+	<meta name="keywords" content="" />
+	<script type="text/javascript" charset="utf-8" src="//g.alicdn.com/sd/ncpc/nc.js?t=2015052012"></script>
+	<script>
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+	<!-- Meta tag Keywords -->
+	<!-- css files -->
+	<link rel="stylesheet" href="{% static 'authen/css/style.css' %}" type="text/css" media="all" />
+	<!-- Style-CSS -->
+	<link rel="stylesheet" href="{% static 'authen/css/fontawesome-all.css' %}">
+	<!-- Font-Awesome-Icons-CSS -->
+	<!-- //css files -->
+	<!-- web-fonts -->
+	<!-- <link href="http://maxcdn.bootstrapcdn.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
+	<link href="http://maxcdn.bootstrapcdn.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet"> -->
+	<!-- //web-fonts -->
+	<style>
+		tbody tr th label {
+			color: #fff;
+		}
+	</style>
+</head>
+
+<body>
+	<video autoplay muted loop style="width:100" id="v1">
+		<source src="{% static 'authen/media/car.mp4' %}"></source>
+	</video>
+	<!-- bg effect -->
+	<div id="bg">
+		<canvas></canvas>
+		<canvas></canvas>
+		<canvas></canvas>
+	</div>
+	<!-- //bg effect -->
+	<!-- title -->
+	<h1>
+		<a href="/car/"><img src="{% static 'authen/imgs/logo.png' %}" alt=""></a>
+	</h1>
+	<!-- //title -->
+	<!-- content -->
+	<div class="sub-main-w3">
+		<form action="" method="post">
+			<div style="text-align: center; color: red">
+				{{error}}
+			</div>
+			{%csrf_token%}
+			<div>
+				<div style="text-align: center; color: red">
+					{%for k,v in form.errors.items%}
+					<p>{{v}}</p>
+					{%endfor%}
+				</div>
+				<table>
+					<tr align="center">
+						<td>
+							<font face="宋体" size="4" color="white">用户名:</font>
+						</td>
+						<!-- <td><input type="text"  placeholder="请输入用户名"></td> -->
+						<td>{{form.username}}</td>
+					</tr>
+					<tr align="center">
+						<td>
+							<font face="宋体" size="4" color="white">密码:</font>
+						</td>
+						<td>{{form.password}}</td>
+					</tr>
+					<tr align="center">
+						<td>
+							<font face="宋体" size="4" color="white">确认密码:</font>
+						</td>
+						<td>{{form.repassword}}</td>
+					</tr>
+					<tr align="center">
+						<td>
+							<font face="宋体" size="4" color="white">邮箱:</font>
+						</td>
+						<td>{{form.email}}</td>
+					</tr>
+				</table>
+			</div>
+			<input id="registerbtn" type="submit" value="注册"> &nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" value="登录" onclick="window.location.href='{%url 'login'%}'">
+		</form>
+
+	</div>
+	<!-- //content -->
+	<!-- Jquery -->
+	<script src="{% static 'authen/js/jquery-3.3.1.min.js' %}"></script>
+	<!-- //Jquery -->
+
+	<!-- effect js -->
+	<script src="{% static 'authen/js/canva_moving_effect.js' %}"></script>
+	<!-- //effect js -->
+</body>
+
+</html>
+<script>
+	var video = document.getElementById('v1');
+	video.playbackRate = 2;
+</script>
